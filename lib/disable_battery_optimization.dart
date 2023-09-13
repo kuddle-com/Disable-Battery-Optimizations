@@ -50,4 +50,12 @@ class DisableBatteryOptimization {
   static Future<bool?> get isAllBatteryOptimizationDisabled async {
     return await _channel.invokeMethod("isAllOptimizationsDisabled");
   }
+
+  static Future<bool?> get isBackgroundActivityAllowed async {
+    return await _channel.invokeMethod("isBackgroundActivityAllowed");
+  }
+
+  static Future<bool?> showBackgroundActivitySettings() async {
+    return await _channel.invokeMethod("showBackgroundActivitySettings");
+  }
 }
