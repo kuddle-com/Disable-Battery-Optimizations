@@ -155,7 +155,7 @@ public class DisableBatteryOptimizationPlugin implements FlutterPlugin, Activity
                 break;
             case "showBackgroundActivitySettings":
                 BatteryOptimizationUtil.showBackgroundActivitySettings(mContext);
-                result.success(true);
+                result.success(BatteryOptimizationUtil.isBackgroundActivityAllowed(mContext));
                 break;
             default:
                 result.notImplemented();
