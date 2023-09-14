@@ -150,6 +150,13 @@ public class DisableBatteryOptimizationPlugin implements FlutterPlugin, Activity
             case "isAllOptimizationsDisabled":
                 result.success(getManAutoStart() && BatteryOptimizationUtil.isIgnoringBatteryOptimizations(mContext) && getManBatteryOptimization());
                 break;
+            case "isBackgroundActivityAllowed":
+                result.success(BatteryOptimizationUtil.isBackgroundActivityAllowed(mContext));
+                break;
+            case "showBackgroundActivitySettings":
+                BatteryOptimizationUtil.showBackgroundActivitySettings(mContext);
+                result.success(BatteryOptimizationUtil.isBackgroundActivityAllowed(mContext));
+                break;
             default:
                 result.notImplemented();
         }

@@ -1,9 +1,11 @@
 package in.jvapps.disable_battery_optimization.utils;
 
+import static android.content.Context.ACTIVITY_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +24,22 @@ public class BatteryOptimizationUtil {
         Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
         intent.setData(Uri.fromParts("package", context.getApplicationContext().getPackageName(), null));
         return intent;
+    }
+
+    public static boolean isBackgroundActivityAllowed(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            return !activityManager.isBackgroundRestricted();
+        }
+        return true;
+    }
+
+    public static void showBackgroundActivitySettings(Context context) {
+        if (!isBackgroundActivityAllowed(context)) {
+            final Intent intent = getAppSettingsIntent(context);
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
     }
 
     public static boolean isIgnoringBatteryOptimizations(Context context) {
