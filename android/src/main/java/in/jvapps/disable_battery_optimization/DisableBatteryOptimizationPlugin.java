@@ -42,13 +42,6 @@ public class DisableBatteryOptimizationPlugin implements FlutterPlugin, Activity
     private String manBatteryTitle;
     private String manBatteryMessage;
 
-    private DisableBatteryOptimizationPlugin(Activity activity, Context context) {
-        if (activity != null)
-            mActivity = activity;
-        if (context != null)
-            mContext = context;
-    }
-
     /**
      * Default constructor for DisableBatteryOptimizationPlugin.
      *
